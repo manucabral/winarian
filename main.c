@@ -1,12 +1,22 @@
 #include "src/winarian.h"
+#include "src/color.h"
 
 int main(int argc, char *argv[])
 {
-    Configuracion Configuracion;
+    int id;
+    Nodo *ListaRegistro = InicializarWinarian();
+
     AjustarVentana();
     EstablecerTituloConsola();
-    MostrarSubtitulo();
-    MostrarMenu();
+
+    while (1)
+    {
+        MostrarSubtitulo();
+        MostrarMenu(ListaRegistro);
+        scanf("%d", &id);
+        ObtenerValorRegistro(&ListaRegistro, id);
+        LimpiarConsola();
+    }
     system("pause");
     return 0;
 }
