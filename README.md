@@ -2,10 +2,11 @@
 Simple programa que te permite habilitar o deshabilitar ciertas llaves del registro de Windows que pueden servirte.
 
 ## Lista de opciones
-- Cortana
 - Segundos en el reloj
 - Archivos ocultos
 - Windows Consumer Features
+- Bing
+- Cortana
 
 ## Uso
 1. Descarga la última versión de Winarian desde [acá]()
