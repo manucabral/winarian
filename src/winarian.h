@@ -7,7 +7,7 @@
 #include <windows.h>
 
 #define NOMBRE "WINARIAN"
-#define VERSION "0.0.3"
+#define VERSION "0.0.5"
 #define AUTOR "ne0de"
 
 #define DESACTIVADO 0
@@ -15,27 +15,28 @@
 
 #define _MAX_TITLE 64
 
-#define R_EXPLORADOR_AVANZADO "Software\vMicrosoft\\Windows\\CurrentVersion\\Explorer\\Advanced"
-
 typedef struct InfoRegistro
 {
     int id, valor;
+    HKEY raiz;
     char nombre[_MAX_PATH], llave[_MAX_FNAME], ruta[_MAX_PATH];
 } Registro;
 
-typedef struct InfoNodo
+typedef struct Lista
 {
     Registro info;
-    struct InfoNodo *sig;
-} Nodo;
+    struct Lista *sig;
+} Lista;
 
 void AjustarVentana(void);
 void EstablecerTituloConsola(void);
 void MostrarSubtitulo(void);
-void MostrarMenu(Nodo *ListaRegistro);
+void MostrarMenu(Lista *);
 char *InterpretarValor(int);
-Nodo *ObtenerNodoRegistro(Nodo *, int);
-Nodo *InicializarWinarian(void);
-int ObtenerValorRegistro(Nodo **, int);
+int InterpretarColor(int);
+Lista *GenerarLista(void);
+void InsertarSiguiente(Lista **, Registro);
+void AgregarOpciones(Lista **);
+int ActualizarRegistro(Lista **, int);
 
 #endif // WINARIAN_H_INCLUDED

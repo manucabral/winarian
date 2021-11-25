@@ -8,7 +8,6 @@ int LimpiarConsola(void)
 
     if (!GetConsoleMode(hStdOut, &mode))
         return EXIT_FAILURE;
-    
 
     const DWORD originalMode = mode;
     mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;

@@ -4,18 +4,21 @@
 int main(int argc, char *argv[])
 {
     int id;
-    Nodo *ListaRegistro = InicializarWinarian();
+    struct Lista *Lista = GenerarLista();
+    AgregarOpciones(&Lista);
 
     AjustarVentana();
     EstablecerTituloConsola();
 
+    //for (size_t i = 1; i <= 3; i++) ActualizarRegistro(&Lista, i);
+    
     while (1)
     {
         MostrarSubtitulo();
-        MostrarMenu(ListaRegistro);
+        MostrarMenu(Lista);
         scanf("%d", &id);
-        ObtenerValorRegistro(&ListaRegistro, id);
-        LimpiarConsola();
+        ActualizarRegistro(&Lista, id);
+        //system("cls");
     }
     system("pause");
     return 0;
