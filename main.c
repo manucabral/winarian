@@ -10,8 +10,6 @@ int main(int argc, char *argv[])
     AjustarVentana();
     EstablecerTituloConsola();
 
-    //for (size_t i = 1; i <= 3; i++) ActualizarRegistro(&Lista, i);
-    
     while (1)
     {
         MostrarSubtitulo();
