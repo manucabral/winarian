@@ -7,7 +7,7 @@
 #include <windows.h>
 
 #define NOMBRE "WINARIAN"
-#define VERSION "0.0.5"
+#define VERSION "0.0.7"
 #define AUTOR "ne0de"
 
 #define DESACTIVADO 0
@@ -38,5 +38,6 @@ Lista *GenerarLista(void);
 void InsertarSiguiente(Lista **, Registro);
 void AgregarOpciones(Lista **);
 int ActualizarRegistro(Lista **, int);
+int CambiarValorRegistro(Lista **, int);
 
 #endif // WINARIAN_H_INCLUDED

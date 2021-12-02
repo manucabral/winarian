@@ -51,6 +51,7 @@ void MostrarMenu(Lista *ListaRegistro)
         ListaRegistro = ListaRegistro->sig;
     }
     CambiarColorConsola(BLANCO);
+    printf("[5] Salir\n");
     return;
 }
 
@@ -75,7 +76,6 @@ void InsertarSiguiente(Lista **Raiz, Registro NuevoRegistro)
     Nuevo->sig = NULL;
     if (*Raiz == NULL)
     {
-        puts("Insertado primer producto de lista.");
         *Raiz = Nuevo;
         return;
     }
@@ -84,7 +84,6 @@ void InsertarSiguiente(Lista **Raiz, Registro NuevoRegistro)
         Ultimo = Ultimo->sig;
 
     Ultimo->sig = Nuevo;
-    puts("Nuevo producto insertado en la lista.");
     return;
 }
 
@@ -107,6 +106,21 @@ void AgregarOpciones(Lista **Raiz)
     InsertarSiguiente(&*Raiz, Nuevo);
 
     Nuevo.id = 3;
+    Nuevo.raiz = HKEY_CURRENT_USER;
+    strcpy(Nuevo.nombre, "Buscar por Bing en el explorador de Windows");
+    strcpy(Nuevo.ruta, "Software\\Microsoft\\Windows\\CurrentVersion\\Search");
+    strcpy(Nuevo.llave, "BingSearchEnabled");
+    InsertarSiguiente(&*Raiz, Nuevo);
+
+    Nuevo.id = 4;
+    Nuevo.raiz = HKEY_CURRENT_USER;
+    strcpy(Nuevo.nombre, "Mostrar version de Windows en el escritorio");
+    strcpy(Nuevo.ruta, "Control Panel\\Desktop");
+    strcpy(Nuevo.llave, "PaintDesktopVersion");
+    InsertarSiguiente(&*Raiz, Nuevo);
+
+    /*
+    Nuevo.id = 3;
     Nuevo.raiz = HKEY_LOCAL_MACHINE;
     strcpy(Nuevo.nombre, "Cortana");
     strcpy(Nuevo.ruta, "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search");
@@ -119,7 +133,7 @@ void AgregarOpciones(Lista **Raiz)
     strcpy(Nuevo.ruta, "SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent");
     strcpy(Nuevo.llave, "DisableWindowsConsumerFeatures");
     InsertarSiguiente(&*Raiz, Nuevo);
-
+    */
     return;
 }
 
@@ -156,6 +170,47 @@ DWORD ObtenerValor(HKEY Raiz, char *Llave)
 int ActualizarRegistro(Lista **ListaRegistro, int id)
 {
     HKEY Llave;
+    DWORD Data = 0;
+    Lista *Registro = ObtenerNodoRegistro(*ListaRegistro, id);
+
+    if (Registro == NULL)
+    {
+        puts("Id del registro no encontrada");
+        return EXIT_FAILURE;
+    }
+
+    Llave = AbrirLlave(Registro->info.raiz, Registro->info.ruta);
+    if (Llave == Registro->info.raiz)
+    {
+        if (id == 3)
+        {
+            HKEY SubLlave;
+            if (RegCreateKeyEx(Registro->info.raiz, Registro->info.ruta, 0, 0, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, &SubLlave, NULL))
+            {
+                puts("No se puede crear el registro");
+                return EXIT_FAILURE;
+            }
+        }
+
+        return EXIT_FAILURE;
+    }
+
+    Data = ObtenerValor(Llave, Registro->info.llave);
+    if (Data == 2)
+    {
+        printf("Creando llave %s por primera vez\n", Registro->info.llave);
+        EstablecerValor(Llave, Registro->info.llave, 1);
+    }
+
+    Registro->info.valor = Data;
+    RegCloseKey(Llave);
+    puts("Registro cargado correctamente.");
+    return EXIT_SUCCESS;
+}
+
+int CambiarValorRegistro(Lista **ListaRegistro, int id)
+{
+    HKEY Llave;
     DWORD Data;
     Lista *Registro = ObtenerNodoRegistro(*ListaRegistro, id);
 
@@ -171,7 +226,7 @@ int ActualizarRegistro(Lista **ListaRegistro, int id)
         if (id == 3)
         {
             HKEY SubLlave;
-            if(RegCreateKeyEx(Registro->info.raiz, Registro->info.ruta, 0, 0, REG_OPTION_NON_VOLATILE,KEY_ALL_ACCESS,NULL, &SubLlave, NULL))
+            if (RegCreateKeyEx(Registro->info.raiz, Registro->info.ruta, 0, 0, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, &SubLlave, NULL))
             {
                 puts("No se puede crear el registro");
                 return EXIT_FAILURE;
@@ -191,5 +246,6 @@ int ActualizarRegistro(Lista **ListaRegistro, int id)
     Registro->info.valor = !Data;
     EstablecerValor(Llave, Registro->info.llave, !Data);
     RegCloseKey(Llave);
+    puts("Opcion actualizada, para ver cambios reinicia tu pc");
     return EXIT_SUCCESS;
 }
