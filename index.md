@@ -1,37 +1,23 @@
-## Welcome to GitHub Pages
+<p align="center">
+<img src="https://github.com/manucabral/winarian/blob/main/images/logo.png?raw=true" width="250" title="example">
+</p>
+<p align="center">
+  Una herramienta que te permite habilitar o deshabilitar ciertas llaves del registro de Windows que pueden servirte.
+  Esto no es un malware, simplemente automatiza el cambio manual que tu harías.
+</p>
 
-You can use the [editor on GitHub](https://github.com/manucabral/winarian/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## Uso
+1. Descarga la última versión de Winarian desde [acá](https://github.com/manucabral/winarian/releases)
+2. Extrae y ejecuta el archivo `winarian.exe`
+3. Desactivar el antivirus si no se efectuan los cambios.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<img src="https://github.com/manucabral/winarian/blob/main/images/main.png?raw=true" width="450" title="example">
 
-### Markdown
+## Llaves disponibles
+- Mostrar segundos en el reloj `Requiere reiniciar`
+- OneDrive en el explorador de archivos `Requiere reiniciar`
+- Buscar mediante Bing en el explorador de Windows
+- Mostrar version de Windows en el escritorio `Requiere actualizar el escritorio`
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/manucabral/winarian/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Compilar
+`gcc main.c src/winarian.c src/color.c -o winarian`
