@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/manucabral/winarian/blob/main/images/logo.png" width="250" title="example">
+<img src="https://github.com/manucabral/winarian/blob/main/images/logo.png?raw=true" width="250" title="example">
 </p>
 <p align="center">
   Una herramienta que te permite habilitar o deshabilitar ciertas llaves del registro de Windows que pueden servirte.
@@ -7,11 +7,11 @@
 </p>
 
 ## Uso
-1. Descarga la última versión de Winarian desde [acá]()
+1. Descarga la última versión de Winarian desde [acá](https://github.com/manucabral/winarian/releases)
 2. Extrae y ejecuta el archivo `winarian.exe`
 3. Desactivar el antivirus si no se efectuan los cambios.
 
-<img src="https://github.com/manucabral/winarian/blob/main/images/main.png" width="450" title="example">
+<img src="https://github.com/manucabral/winarian/blob/main/images/main.png?raw=true" width="450" title="example">
 
 ## Llaves disponibles
 - Mostrar segundos en el reloj `Requiere reiniciar`
